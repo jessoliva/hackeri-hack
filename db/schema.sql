@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS hacks_db;
+
+CREATE DATABASE hacks_db;
