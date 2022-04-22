@@ -13,6 +13,7 @@ Post.belongsTo(User, {
     foreignKey: 'user_id',
     onDelete: 'SET NULL'
 });
+//
 
 // Comment Model Associations
 Comment.belongsTo(User, {
@@ -30,5 +31,6 @@ User.hasMany(Comment, {
 Post.hasMany(Comment, {
     foreignKey: 'post_id'
 });
+//
 
 module.exports = { User, Post, Comment };

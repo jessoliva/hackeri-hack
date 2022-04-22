@@ -8,6 +8,8 @@ router.get('/', (req, res) => {
     User.findAll({
         attributes: { exclude: ['password'] } // client doesn't need the users password
     })
+    // this is the Promise that captures the response from the database call
+    // database call is the findAll and what is returned
     .then(dbUserData => res.json(dbUserData)) //dbUserData is the data retrieved from the findAll() method
     .catch(err => {
         console.log(err);
@@ -39,10 +41,13 @@ router.get('/:id', (req, res) => {
         ]
     })
     .then(dbUserData => {
+
         if (!dbUserData) {
             res.status(404).json({ message: 'No user found with this id' });
+            // The 404 status code identifies a user error and will need a different request for a successful response
             return;
         }
+        
         // else return the user
         res.json(dbUserData);
     })

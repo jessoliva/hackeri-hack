@@ -16,11 +16,11 @@ Post.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        post_url: {
+        content: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: { // we ensure that this url is a verified link by setting the isURL property to true
-                isURL: true
+            validate: {
+                len: [1]
             }
         },
         user_id: { // used to create a relationship between user table and post table
