@@ -52,6 +52,56 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// LOGIN USER /api/users/login
+router.post('/login', (req, res) => {
+    User.findOne({
+        where: {
+            email: req.body.email // find user based on email
+        }
+    })
+    .then(dbUserData => {
+        // check if user with that email exists
+        if (!dbUserData) {
+            res.status(400).json({ message: 'No user with that email address!' });
+            return;
+        }
+
+        // verify user based on password entered
+        // in User.js model
+        const validPassword = dbUserData.checkPassword(req.body.password);
+
+        if (!validPassword) {
+            res.status(400).json({ message: 'Incorrect password!' });
+            return;
+        }
+
+        res.json({ user: dbUserData, message: 'You are now logged in!' });
+
+        // req.session.save(() => {
+        //     // declare session variables
+        //     req.session.user_id = dbUserData.id;
+        //     req.session.username = dbUserData.username;
+        //     req.session.loggedIn = true;
+      
+        //     res.json({ user: dbUserData, message: 'You are now logged in!' });
+        // });
+    });  
+});
+
+// LOGOUT USER /api/users/logout
+// router.post('/logout', (req, res) => {
+//     if (req.session.loggedIn) {
+//         //  use the destroy() method to clear the session
+//         req.session.destroy(() => {
+//             res.status(204).end();
+//         });
+//         // The HTTP 204 No Content success status response code indicates that a request has succeeded, but that the client doesn't need to navigate away from its current page
+//     }
+//     else {
+//         res.status(404).end();
+//     }
+// });
+
 // POST /api/users
 router.post('/', (req, res) => {
     User.create({
