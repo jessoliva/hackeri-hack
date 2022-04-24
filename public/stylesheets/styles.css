@@ -257,7 +257,8 @@ main {
 .content {
     font-size: 15px;
     color: var(--secondary);
-    margin: 10px 30px 20px 30px;
+    padding-bottom: 20px;
+    margin: 20px 30px 20px 30px;
 }
 
 .btn-create {
@@ -389,6 +390,7 @@ header nav a:not(:hover) {
     background: rgba(0,0,0,0.5);
     border: rgba(0,0,0,0.5);
     border-radius: 20px;
+    padding: 25px;
 }
 
 
