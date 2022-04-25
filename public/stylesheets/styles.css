@@ -271,7 +271,7 @@ main {
     padding-right: 10px;
 }
 
-.content {
+.home-content {
     font-size: 15px;
     color: var(--secondary);
     padding-bottom: 20px;
@@ -299,7 +299,6 @@ main {
 /*****************************************************/
 
 /***** LOGIN AND SIGN-UP PAGES *****/
-
 /* header li {
     padding: 10px 15px;
 }

@@ -7,6 +7,7 @@ const { Post, User, Comment } = require('../../models');
 
 // GET all posts /api/posts
 router.get('/', (req, res) => {
+    // use this same query to populate the homepage template in home-routes.js
     Post.findAll({ // this is the query
         attributes: [
             'id',

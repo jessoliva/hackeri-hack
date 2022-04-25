@@ -9,7 +9,9 @@ const PORT = process.env.PORT || 3001;
 // express-handlebars
 const exphbs = require('express-handlebars');
 // pass the helpers to the existing exphbs.create() statement 
-const hbs = exphbs.create({ helpers });
+// const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({});
+
 
 // express-handlebars engine setup
 app.engine('handlebars', hbs.engine);
