@@ -27,11 +27,25 @@ body {
     radial-gradient(at 0% 100%, hsla(279,27%,15%,1) 0px, transparent 50%),
     radial-gradient(at 80% 100%, hsla(247,83%,27%,1) 0px, transparent 50%);
     background-size: cover;
+    /* background-repeat: no-repeat; */
+    background-size: auto;
 }
 /************************/
 
 /* HERO STYLES */
 header {
+    /* background: rgba(0,0,0,0.2); */
+    /* background-color:hsla(0,3%,4%,1);
+    background-image:
+    radial-gradient(at 5% 98%, hsla(181,72%,10%,1) 0px, transparent 50%),
+    radial-gradient(at 61% 25%, hsla(190,44%,9%,1) 0px, transparent 50%),
+    radial-gradient(at 96% 13%, hsla(183,87%,21%,1) 0px, transparent 50%),
+    radial-gradient(at 40% 20%, hsla(266,71%,26%,1) 0px, transparent 50%),
+    radial-gradient(at 2% 56%, hsla(268,89%,24%,1) 0px, transparent 50%),
+    radial-gradient(at 83% 87%, hsla(231,41%,14%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(279,27%,15%,1) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, hsla(247,83%,27%,1) 0px, transparent 50%);
+    background-size: cover; */
     padding: 1% 0 1% 0;
     display: flex;
     flex-direction: row;
@@ -215,6 +229,9 @@ ul li:not(:hover) ul li {
     color: var(--secondary);
     font-size: 18px;
 } */
+.overflow {
+    overflow: auto;
+}
 /* MAIN STYLES */
 main {
     padding: 55px 90px 60px 90px;
@@ -319,13 +336,13 @@ header nav a:not(:hover) {
 }
 
 .btn-login:hover {
-    color: white;
+    color: var(--primary);
     background-color: #380f6e;
     transition: all 0.6s ease-in-out;
 }
  
 .btn-login:not(:hover) {
-    color: white;
+    color: var(--secondary);
     /* background-color:hsla(0,3%,4%,1);
     background-image:
     radial-gradient(at 5% 98%, rgb(24, 74, 81) 0px, transparent 50%),
@@ -392,8 +409,113 @@ header nav a:not(:hover) {
     border-radius: 20px;
     padding: 25px;
 }
+/*****************************************************/
+/*****************************************************/
 
+/***** POST PAGE *****/
+.view {
+    padding: 0 120px 0 120px;
+}
 
+.view-post {
+    /* background-color: black;
+    opacity: 0.2; */
+    border-radius: 20px;
+    margin: 10px;
+}
+
+.view-post div {
+
+}
+
+.view-post h2 {
+    font-size: 38px;
+    font-weight: bold;
+    color: #b4a0ee;
+    margin: 0 20px 5px 20px;
+}
+
+.view-post div p {
+    color: var(--secondary);
+    margin: 10px;
+    margin-top: 0;
+}
+
+.content {
+    font-size: 15px;
+    color: var(--secondary);
+    background: rgba(0,0,0,0.7);
+    border-radius: 20px;
+    padding: 30px;
+    margin: 20px 30px 20px 30px;
+    overflow: auto;
+    max-height: 220px;
+}
+
+.content::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+}
+  
+.content::-webkit-scrollbar-track {
+    background: black;        /* color of the tracking area */
+    border-radius: 20px; 
+}
+  
+.content::-webkit-scrollbar-thumb {
+    background-color: rgba(133, 53, 230, 0.5);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    /* border: 3px solid var(--primary);  creates padding around scroll thumb */
+}
+
+.comments {
+    padding-right: 130px;
+}
+
+.comment-input {
+    color: var(--primary);
+    background-color: rgba(0,0,0,0.7);
+    border: none;
+    border-radius: 15px;
+    width: 60%;
+    margin-top: 20px;
+    height: 110px;
+    padding: 15px;
+}
+
+.comments {
+    margin-top: 20px;
+}
+
+.comment-text {
+    color: var(--primary);
+}
+
+.meta {
+    color: var(--secondary);
+}
+
+.delete-comment-btn {
+    font-size: 11px;
+    color: red;
+    border: 0.5px black solid;
+    background-color: black;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.delete-comment-btn:hover{
+    color: black;
+    border: 0.5px red solid;
+    background-color: red;
+    transition: all 0.7s ease-in-out;
+}
+
+.delete-comment-btn:not(:hover) {
+    color: red;
+    border: 0.5px black solid;
+    background-color: black;
+    transition: all 0.7s ease-in-out;
+}
 /*****************************************************/
 /*****************************************************/
 @media only screen and (max-width: 1100px) {
