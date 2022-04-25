@@ -6,6 +6,15 @@ const sequelize = require('./config/connection');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// express-handlebars
+const exphbs = require('express-handlebars');
+// pass the helpers to the existing exphbs.create() statement 
+const hbs = exphbs.create({ helpers });
+
+// express-handlebars engine setup
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
