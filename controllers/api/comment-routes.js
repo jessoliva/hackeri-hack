@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     Comment.create({
         comment_text: req.body.comment_text,
-        user_id: req.body.user_id, // NEED TO CHANGE TO req.session.user_id,
+        user_id: req.session.user_id,
         post_id: req.body.post_id 
     })
     .then(dbCommentData => res.json(dbCommentData))
@@ -35,10 +35,10 @@ router.post('/', (req, res) => {
 
 // NEED WITHAUTH
 // DELETE a comment /api/comments/:id
-router.delete('/', (req, res) => {
+router.delete('/:id', (req, res) => {
     Comment.destroy({
         where: {
-            id: req.body.id
+            id: req.params.id
         }
     })
     .then(dbCommentData => {
