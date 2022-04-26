@@ -12,6 +12,23 @@ const exphbs = require('express-handlebars');
 // const hbs = exphbs.create({ helpers });
 const hbs = exphbs.create({});
 
+// sequelize session to create sessions for each user
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const sess = {
+    secret: 'chihuahuas',
+    cookie: {},
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+      db: sequelize
+    })
+};
+
+app.use(session(sess));
+//
+// This code sets up an Express.js session and connects the session to our Sequelize database.
 
 // express-handlebars engine setup
 app.engine('handlebars', hbs.engine);

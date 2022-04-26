@@ -3,6 +3,8 @@ const { Post, User, Comment } = require('../models');
 
 // HOMEPAGE WITH ALL POSTS
 router.get('/', (req, res) => {
+    console.log(req.session);
+
     console.log('======================');
 
     Post.findAll({ // this is the query
@@ -35,14 +37,15 @@ router.get('/', (req, res) => {
         // To serialize the object down to only the properties you need, you can use Sequelize's get() method.
         const posts = dbPostData.map(post => post.get({ plain: true }));
 
-        // console.log(posts);
-
-        res.render('homepage', { posts });
-  
-        // res.render('homepage', {
-        //     posts,
-        //     loggedIn: req.session.loggedIn
-        // });
+        res.render('homepage', 
+            { 
+                posts,
+                loggedIn: req.session.loggedIn,
+                username: req.session.username,
+                dashboard: true
+                // sends these to the homepage and main page
+            }
+        );
     })
     .catch(err => res.status(500).json(err));
 });
@@ -50,10 +53,10 @@ router.get('/', (req, res) => {
 // LOGIN PAGE
 router.get('/login', (req, res) => {
     // check for a session and redirect to the homepage if one exists
-    // if (req.session.loggedIn) {
-    //     res.redirect('/');
-    //     return;
-    // }
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
 
     res.render('login');
 });

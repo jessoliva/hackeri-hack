@@ -57,6 +57,32 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// POST /api/users
+router.post('/', (req, res) => {
+    User.create({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+        // comes from the form submitting this data
+    })
+    .then(dbUserData => {
+
+        req.session.save(() => {
+            req.session.user_id = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
+        
+            res.json(dbUserData);
+        });
+        // We want to make sure the session is created before we send the response back, so we're wrapping the variables in a callback. 
+        // The req.session.save() method will initiate the creation of the session and then run the callback function once complete.
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
 // LOGIN USER /api/users/login
 router.post('/login', (req, res) => {
     User.findOne({
@@ -65,9 +91,9 @@ router.post('/login', (req, res) => {
         }
     })
     .then(dbUserData => {
-        // check if user with that email exists
+        // check if user with that username exists
         if (!dbUserData) {
-            res.status(400).json({ message: 'No user with that email address!' });
+            res.status(400).json({ message: 'No user with that username!' });
             return;
         }
 
@@ -80,56 +106,34 @@ router.post('/login', (req, res) => {
             return;
         }
 
-        res.json({ user: dbUserData, message: 'You are now logged in!' });
-
-        // req.session.save(() => {
-        //     // declare session variables
-        //     req.session.user_id = dbUserData.id;
-        //     req.session.username = dbUserData.username;
-        //     req.session.loggedIn = true;
+        req.session.save(() => {
+            // declare session variables
+            req.session.user_id = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
       
-        //     res.json({ user: dbUserData, message: 'You are now logged in!' });
-        // });
-    });  
-});
-
-// LOGOUT USER /api/users/logout
-// router.post('/logout', (req, res) => {
-//     if (req.session.loggedIn) {
-//         //  use the destroy() method to clear the session
-//         req.session.destroy(() => {
-//             res.status(204).end();
-//         });
-//         // The HTTP 204 No Content success status response code indicates that a request has succeeded, but that the client doesn't need to navigate away from its current page
-//     }
-//     else {
-//         res.status(404).end();
-//     }
-// });
-
-// POST /api/users
-router.post('/', (req, res) => {
-    User.create({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password
-        // comes from the form submitting this data
-    })
-    .then(dbUserData => {
-        // req.session.save(() => {
-        //     req.session.user_id = dbUserData.id;
-        //     req.session.username = dbUserData.username;
-        //     req.session.loggedIn = true;
-        
-        //     res.json(dbUserData);
-        // });
-        // // We want to make sure the session is created before we send the response back, so we're wrapping the variables in a callback. The req.session.save() method will initiate the creation of the session and then run the callback function once complete.
-        res.json(dbUserData);
+            res.json({ user: dbUserData, message: 'You are now logged in!' });
+        });
     })
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
     });
+});
+
+// connected through logout.js!!
+// LOGOUT USER /api/users/logout
+router.post('/logout', (req, res) => {
+    if (req.session.loggedIn) {
+        //  use the destroy() method to clear the session
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+        // The HTTP 204 No Content success status response code indicates that a request has succeeded, but that the client doesn't need to navigate away from its current page
+    }
+    else {
+        res.status(404).end();
+    }
 });
 
 // PUT /api/users/1

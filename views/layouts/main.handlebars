@@ -33,8 +33,9 @@
     <header class="hero shadow vw-100 sticky-top">
       <h1 class="animate-character text-center">jedai</h1>
       <p class="mb-1 text-center">
-        <!-- <span class="username">{{username}}, </span> -->
-        the techiest tech blog
+        {{#if loggedIn}}
+          {{username}}, share your thoughts with the world
+        {{/if}}
       </p>
       <!-- navigation section -->
       <nav class="d-flex flex-wrap justify-content-center">
@@ -45,15 +46,21 @@
               <li>
                 <a href="/" class="nav-link">Home</a>
               </li>
+              {{#if loggedIn}}
               <li>
                 <a href="/dashboard" class="nav-link">Dashboard</a>
               </li>
+              <li>
+                <a id="logout" href="/logout" class="nav-link">Logout</a>
+              </li>
+              {{else}}
               <li>
                 <a href="/login" class="nav-link">Login</a>
               </li>
               <li>
                 <a href="/sign-up" class="nav-link">Sign Up</a>
               </li>
+              {{/if}}
             </ul>
           </li>
         </ul>
@@ -64,5 +71,6 @@
 
     <!-- jquery link -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="/javascript/logout.js"></script>
   </body>
 </html>
