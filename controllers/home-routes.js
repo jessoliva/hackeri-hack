@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
 
-// get all posts for homepage
+// HOMEPAGE WITH ALL POSTS
 router.get('/', (req, res) => {
     console.log('======================');
 
@@ -47,7 +47,7 @@ router.get('/', (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
-// render login page
+// LOGIN PAGE
 router.get('/login', (req, res) => {
     // check for a session and redirect to the homepage if one exists
     // if (req.session.loggedIn) {
@@ -56,6 +56,11 @@ router.get('/login', (req, res) => {
     // }
 
     res.render('login');
+});
+
+// SIGN UP PAGE
+router.get('/sign-up', (req, res) => {
+    res.render('sign-up');
 });
 
 
