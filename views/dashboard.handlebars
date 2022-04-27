@@ -1,7 +1,10 @@
 <!-- main -->
 <main class="background h-100">
-    <section class="posts d-flex flex-wrap justify-content-center">
-        <button id="create-post" type="submit" class="btn-create btn rounded-pill shadow">Create Post</button>
+    <section class="posts justify-content-center">
+        <div class="d-flex justify-content-center">
+            <a href="/create-post" class="link"><button id="create-post" type="submit" class="btn-create btn rounded-pill shadow">Create Post</button></a>
+        </div>
+
         {{#each posts}}
         <a href="/posts/{{id}}" class="link">
             <article class="post">

@@ -81,7 +81,7 @@ router.post('/', (req, res) => {
     Post.create({
         title: req.body.title,
         content: req.body.content,
-        user_id: req.body.user_id, // NEED TO CHANGE TO req.session.user_id,
+        user_id: req.session.user_id
     })
     .then(dbUserData => {
         res.json(dbUserData)})

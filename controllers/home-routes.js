@@ -72,11 +72,11 @@ router.get('/login', (req, res) => {
 // SIGN UP PAGE
 router.get('/sign-up', (req, res) => {
     res.render('sign-up',
-    {
-        signUpPage: false,
-        loginPage: true
-    }
-);
+        {
+            signUpPage: false,
+            loginPage: true
+        }
+    );
 });
 
 // SINGLE POST PAGE
@@ -141,11 +141,6 @@ router.get('/dashboard', (req, res) => {
         return;
     }
 
-    // finds posts with user_ids matching current session's user_id
-    // const id = parseInt(req.session.user_id);
-
-    // console.log(id);
-
     Post.findAll({
         where: {
             user_id: req.session.user_id
@@ -158,7 +153,6 @@ router.get('/dashboard', (req, res) => {
                 posts,
                 loggedIn: req.session.loggedIn,
                 username: req.session.username,
-                logoutPage: true,
                 dashboardPage: false
             });
     })
@@ -166,6 +160,22 @@ router.get('/dashboard', (req, res) => {
         console.log(err);
         res.status(500).json(err);
     });
+});
+
+// CREATE POST PAGE 
+router.get('/create-post', (req, res) => { // this is the actual url route
+    if (!req.session) {
+        res.redirect('/');
+        return;
+    }
+    
+    res.render('create-post', // this is the handlebar file name
+        {   
+            loggedIn: req.session.loggedIn,
+            username: req.session.username,
+            dashboardPage: true
+        }
+    );
 });
 
 module.exports = router;
