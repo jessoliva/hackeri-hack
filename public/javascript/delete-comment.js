@@ -2,7 +2,9 @@ async function deleteFormHandler(event) {
 
     event.preventDefault();
 
-    let newId = event.target.getAttribute("data-commentid");
+    let newId = event.currentTarget.getAttribute("data-commentid");
+
+    // let newId = e
 
     console.log(newId);
 

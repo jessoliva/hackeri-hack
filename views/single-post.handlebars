@@ -32,7 +32,9 @@
                 </div>
                 <div class="meta">
                     {{user.username}} on {{created_at}}
-                    <button class="delete-comment-btn" data-commentid="{{id}}"><i class="fa-solid fa-xmark"></i></button>
+                    {{#if can_delete}}
+                    <button class="delete-comment-btn" id="{{id}}" data-commentid="{{id}}"><i class="fa-solid fa-xmark"></i></button>
+                    {{/if}}
                 </div>
             </section>
             {{/each}}
@@ -41,5 +43,7 @@
 </main>
 <!-- main end -->
 
-<script src="/javascript/single-post.js"></script>
-<script src="/javascript/comment.js"></script>
+{{#if loggedIn}}
+<script src="/javascript/add-comment.js"></script>
+<script src="/javascript/delete-comment.js"></script>
+{{/if}}

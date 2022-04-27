@@ -19,6 +19,10 @@ Comment.init(
             }
 
         },
+        can_delete: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
         user_id: { // used to create relationship between user table and comment table
             type: DataTypes.INTEGER,
             references: {

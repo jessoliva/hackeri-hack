@@ -98,6 +98,13 @@ router.get('/posts/:id', (req, res) => {
         // serialize the data
         const post = dbPostData.get({ plain: true });
 
+        // check if the comments were written by the signed in user
+        post.comments.forEach(comment => {
+            if (comment.user_id == req.session.user_id) {
+                comment.can_delete = true;
+            }
+        });
+
         // pass data to template
         res.render('single-post', {
             post,
