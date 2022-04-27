@@ -530,6 +530,49 @@ header nav a:not(:hover) {
 }
 /*****************************************************/
 /*****************************************************/
+
+/***** LOGIN AND SIGN-UP PAGES *****/
+.btn-delete {
+    font-size: 18px;
+    margin-bottom: 20px;
+    margin-left: 5px;
+    padding: 5px 20px;
+}
+
+.btn-delete:hover {
+    color: rgb(233, 35, 35);
+    background-color: black;
+    transition: all 0.6s ease-in-out;
+}
+ 
+.btn-delete:not(:hover) {
+    color: black;
+    background-color: rgb(233, 35, 35);
+    transition: all 0.7s ease-in-out;
+}
+
+.btn-update {
+    font-size: 18px;
+    margin-bottom: 20px;
+    margin-right: 5px;
+    padding: 5px 20px;
+}
+
+.btn-update:hover {
+    color: var(--primary);
+    background-color: #380f6e;
+    transition: all 0.6s ease-in-out;
+}
+ 
+.btn-update:not(:hover) {
+    color: var(--secondary);
+    background-color: #214a51;
+    transition: all 0.7s ease-in-out;
+}
+
+
+/*****************************************************/
+/*****************************************************/
 @media only screen and (max-width: 1100px) {
 
     div {

@@ -1,6 +1,11 @@
 <!-- main -->
 <main class="overflow background h-100">
     <section class="view">
+        {{#if canEdit}}
+            <div class="d-flex justify-content-center">
+                <a href="/edit-post/{{post.id}}" class="link"><button id="edit-post-btn" type="submit" class="btn-create create-marg btn rounded-pill shadow">Edit Post</button></a>
+            </div>
+        {{/if}}
         <article class="view-post">
         <div class="d-flex flex-wrap align-items-center justify-content-center">
             <h2 class="w-100 text-center">{{fix_case post.title}}</h2>

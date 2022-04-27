@@ -114,6 +114,14 @@ router.get('/posts/:id', (req, res) => {
         // serialize the data
         const post = dbPostData.get({ plain: true });
 
+        let canEdit;
+        if(post.user_id === req.session.user_id) {
+            canEdit = true;
+        }
+        else {
+            canEdit = false;
+        }
+
         // check if the comments were written by the signed in user
         post.comments.forEach(comment => {
             if (comment.user_id == req.session.user_id) {
@@ -121,11 +129,14 @@ router.get('/posts/:id', (req, res) => {
             }
         });
 
+        console.log('tHIS IS THE POST', post);
+
         // pass data to template
         res.render('single-post', {
             post,
             loggedIn: req.session.loggedIn,
             username: req.session.username,
+            canEdit,
             loginPage: true,
             signUpPage: true,
             dashboardPage: true
@@ -183,28 +194,28 @@ router.get('/create-post', withAuth, (req, res) => { // this is the actual url r
 });
 
 // EDIT POST PAGE
-router.get('/edit/:id', withAuth, (req, res) => {
+router.get('/edit-post/:id', withAuth, (req, res) => {
     Post.findByPk(req.params.id, {
-      attributes: [
-        'id',
-        'content',
-        'title',
-        'created_at'
-      ],
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-          include: {
-            model: User,
-            attributes: ['username']
-          }
-        },
-        {
-          model: User,
-          attributes: ['username']
-        }
-      ]
+        attributes: [
+            'id',
+            'content',
+            'title',
+            'created_at'
+        ],
+        include: [
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
     })
     .then(dbPostData => {
         if (dbPostData) {
@@ -222,8 +233,9 @@ router.get('/edit/:id', withAuth, (req, res) => {
         }
     })
     .catch(err => {
-    res.status(500).json(err);
+        res.status(500).json(err);
     });
+
 });
 
 module.exports = router;

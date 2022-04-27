@@ -1,0 +1,16 @@
+<!-- main -->
+<main class="w-100 h-100 background">
+    <section class="create-posts d-flex flex-wrap justify-content-center">
+    <button id="update-post-btn" type="submit" class="btn-update create-marg btn rounded-pill shadow mx-1">Update Post</button>
+    <button id="delete-post-btn" type="submit" class="btn-delete create-marg btn rounded-pill shadow mx-1">Delete Post</button>
+    <article class="create-post">
+        <input name="title" id="title" type="text" autofocus="true" placeholder="Post Title" class="title rounded-pill text-center" value="{{post.title}}"/>
+        <textarea class="description mt-0" type="text" id="description"
+        placeholder="Let your thoughts flow ✨ ">{{post.content}}</textarea>
+    </article>
+    </section>
+</main>
+<!-- main end -->
+
+<script src="/javascript/edit-post.js"></script>
+<script src="/javascript/delete-post.js"></script>
