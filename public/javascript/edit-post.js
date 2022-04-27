@@ -3,6 +3,7 @@ async function editFormHandler(event) {
 
     const title = document.querySelector('input[name="title"]').value.trim();
     const content = document.querySelector('#description').value.trim();
+    const created_at = new Date();
 
     const id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
@@ -14,7 +15,8 @@ async function editFormHandler(event) {
         method: 'PUT',
         body: JSON.stringify({
             title,
-            content
+            content,
+            created_at
         }),
         headers: {
             'Content-Type': 'application/json'
