@@ -28,7 +28,7 @@
     <link rel="icon" type="image/x-icon" href="../stylesheets/favicon.png">
   </head>
 
-  <body class="background vw-100 vh-100">
+  <body class="vw-100 vh-100">
     <!-- hero -->
     <header class="hero shadow vw-100 sticky-top">
       <h1 class="animate-character text-center">jedai</h1>
@@ -47,19 +47,27 @@
                 <a href="/" class="nav-link">Home</a>
               </li>
               {{#if loggedIn}}
+
+              {{#if dashboardPage}}
               <li>
                 <a href="/dashboard" class="nav-link">Dashboard</a>
               </li>
+              {{/if}}
               <li>
                 <a id="logout" href="/logout" class="nav-link">Logout</a>
               </li>
               {{else}}
+              {{#if loginPage}}
               <li>
                 <a href="/login" class="nav-link">Login</a>
               </li>
+              {{/if}}
+              {{#if signUpPage}}
               <li>
                 <a href="/sign-up" class="nav-link">Sign Up</a>
               </li>
+              {{/if}}
+            
               {{/if}}
             </ul>
           </li>

@@ -42,7 +42,10 @@ router.get('/', (req, res) => {
                 posts,
                 loggedIn: req.session.loggedIn,
                 username: req.session.username,
-                dashboard: true
+                dashboard: true,
+                loginPage: true,
+                signUpPage: true,
+                dashboardPage: true
                 // sends these to the homepage and main page
             }
         );
@@ -58,12 +61,22 @@ router.get('/login', (req, res) => {
         return;
     }
 
-    res.render('login');
+    res.render('login',
+        {
+            loginPage: false,
+            signUpPage: true
+        }
+    );
 });
 
 // SIGN UP PAGE
 router.get('/sign-up', (req, res) => {
-    res.render('sign-up');
+    res.render('sign-up',
+    {
+        signUpPage: false,
+        loginPage: true
+    }
+);
 });
 
 // SINGLE POST PAGE
@@ -108,7 +121,11 @@ router.get('/posts/:id', (req, res) => {
         // pass data to template
         res.render('single-post', {
             post,
-            loggedIn: req.session.loggedIn
+            loggedIn: req.session.loggedIn,
+            username: req.session.username,
+            loginPage: true,
+            signUpPage: true,
+            dashboardPage: true
         });
     })
     .catch(err => {
@@ -117,5 +134,38 @@ router.get('/posts/:id', (req, res) => {
     });
 })
 
+// DASHBOARD PAGE POSTS
+router.get('/dashboard', (req, res) => {
+    if (!req.session) {
+        res.redirect('/');
+        return;
+    }
+
+    // finds posts with user_ids matching current session's user_id
+    // const id = parseInt(req.session.user_id);
+
+    // console.log(id);
+
+    Post.findAll({
+        where: {
+            user_id: req.session.user_id
+        }
+    })
+    .then(postData => {
+        const posts = postData.map(post => post.get({ plain: true }));
+        res.render('dashboard',
+            {
+                posts,
+                loggedIn: req.session.loggedIn,
+                username: req.session.username,
+                logoutPage: true,
+                dashboardPage: false
+            });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
 
 module.exports = router;

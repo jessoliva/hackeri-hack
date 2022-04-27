@@ -13,11 +13,11 @@ Post.init(
             autoIncrement: true
         },
         title: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(50),
             allowNull: false
         },
         content: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
             validate: {
                 len: [1]

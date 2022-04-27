@@ -1,10 +1,10 @@
 <!-- main -->
-<main class="overflow">
+<main class="overflow background h-100">
     <section class="view">
         <article class="view-post">
         <div class="d-flex flex-wrap align-items-center justify-content-center">
-            <h2 class="w-100 text-center">{{post.title}}</h2>
-            <p>posted by {{post.user.username}} on {{post.createdAt}}</p>
+            <h2 class="w-100 text-center">{{fix_case post.title}}</h2>
+            <p>posted by {{post.user.username}} on {{format_date post.createdAt}}</p>
         </div>
         <p class="content">
             {{post.content}}  
@@ -13,6 +13,22 @@
     </section>
 
     <section class="row">
+        <div class="comments col-6" id="comments">
+            {{#each post.comments}}
+            <section class="comment d-flex flex-wrap justify-content-end">
+                <div class="comment-text d-flex justify-content-end w-100">
+                    {{comment_text}}
+                </div>
+                <div class="meta">
+                    {{user.username}} on {{format_date created_at}}
+                    {{#if can_delete}}
+                    <button class="delete-comment-btn" id="{{id}}" data-commentid="{{id}}"><i class="fa-solid fa-xmark"></i></button>
+                    {{/if}}
+                </div>
+            </section>
+            {{/each}}
+        </div>
+
         {{#if loggedIn}}
         <form class="comment-form col-6">
             <div class="d-flex justify-content-center">
@@ -23,22 +39,6 @@
             </div>
         </form>
         {{/if}}
-
-        <div class="comments col-6" id="comments">
-            {{#each post.comments}}
-            <section class="comment d-flex flex-wrap justify-content-end">
-                <div class="comment-text d-flex justify-content-end w-100">
-                    {{comment_text}}
-                </div>
-                <div class="meta">
-                    {{user.username}} on {{created_at}}
-                    {{#if can_delete}}
-                    <button class="delete-comment-btn" id="{{id}}" data-commentid="{{id}}"><i class="fa-solid fa-xmark"></i></button>
-                    {{/if}}
-                </div>
-            </section>
-            {{/each}}
-        </div>
     </section>
 </main>
 <!-- main end -->

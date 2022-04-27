@@ -8,9 +8,10 @@ const PORT = process.env.PORT || 3001;
 
 // express-handlebars
 const exphbs = require('express-handlebars');
+// allows helpers in utils/helps.js to be used in handlebars
+const helpers = require('./utils/helpers');
 // pass the helpers to the existing exphbs.create() statement 
-// const hbs = exphbs.create({ helpers });
-const hbs = exphbs.create({});
+const hbs = exphbs.create({ helpers });
 
 // sequelize session to create sessions for each user
 const session = require('express-session');
