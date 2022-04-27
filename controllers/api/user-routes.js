@@ -122,6 +122,7 @@ router.post('/login', (req, res) => {
 });
 
 // connected through logout.js!!
+// not in home-routes.js because handlebars for this route is nonexistent
 // LOGOUT USER /api/users/logout
 router.post('/logout', (req, res) => {
     if (req.session.loggedIn) {

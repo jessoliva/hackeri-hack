@@ -2,6 +2,7 @@
 
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // NEED TO ADD WITH AUTHORIZATION
 
@@ -77,7 +78,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST a post /api/posts
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     Post.create({
         title: req.body.title,
         content: req.body.content,
@@ -89,7 +90,7 @@ router.post('/', (req, res) => {
 });
 
 // PUT a post /api/posts/:id
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     Post.update(
         {
             title: req.body.title,
@@ -111,7 +112,7 @@ router.put('/:id', (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     console.log('id', req.params.id);
     Post.destroy({
         where: {

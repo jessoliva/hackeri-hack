@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
 
+// for prevent non-logged in users from accessing routes for logged in users
+const withAuth = require('../utils/auth');
+
 // HOMEPAGE WITH ALL POSTS
 router.get('/', (req, res) => {
     console.log(req.session);
@@ -134,8 +137,9 @@ router.get('/posts/:id', (req, res) => {
     });
 })
 
+// LOGGED IN USERS ROUTES
 // DASHBOARD PAGE POSTS
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', withAuth, (req, res) => {
     if (!req.session) {
         res.redirect('/');
         return;
@@ -163,7 +167,7 @@ router.get('/dashboard', (req, res) => {
 });
 
 // CREATE POST PAGE 
-router.get('/create-post', (req, res) => { // this is the actual url route
+router.get('/create-post', withAuth, (req, res) => { // this is the actual url route
     if (!req.session) {
         res.redirect('/');
         return;
@@ -176,6 +180,50 @@ router.get('/create-post', (req, res) => { // this is the actual url route
             dashboardPage: true
         }
     );
+});
+
+// EDIT POST PAGE
+router.get('/edit/:id', withAuth, (req, res) => {
+    Post.findByPk(req.params.id, {
+      attributes: [
+        'id',
+        'content',
+        'title',
+        'created_at'
+      ],
+      include: [
+        {
+          model: Comment,
+          attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+          include: {
+            model: User,
+            attributes: ['username']
+          }
+        },
+        {
+          model: User,
+          attributes: ['username']
+        }
+      ]
+    })
+    .then(dbPostData => {
+        if (dbPostData) {
+            const post = dbPostData.get({ plain: true });
+            
+            res.render('edit-post', {
+                post,
+                loggedIn: true,
+                username: req.session.username,
+                dashboardPage: true
+            });
+        } 
+        else {
+            res.status(404).end();
+        }
+    })
+    .catch(err => {
+    res.status(500).json(err);
+    });
 });
 
 module.exports = router;
