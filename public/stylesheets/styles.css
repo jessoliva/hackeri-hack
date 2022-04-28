@@ -1,7 +1,8 @@
 /*~~~~~ ALL PAGES HTML~~~~~~*/
 /* UNIVERSAL STYLES */
 :root {
-    --primary: #e0d6ff;
+    /* --primary: #e0d6ff; */
+    --primary: #b4a0ee;
     --secondary: #b2d8d8;
     --tertiary: #e7a9e9;
 }
@@ -75,10 +76,11 @@ header h1 {
 {
     background-image: linear-gradient(
         -225deg,
-        #231557 0%,
-        #6123a3 29%,
-        #ff1361 67%,
-        #fff800 100%
+        #084b4f  0%,
+        #231557 25%,
+        #6123a3 50%,
+        #916fbb 75%,
+        #97dbde 100%
     );
     background-size: auto auto;
     background-clip: border-box;
@@ -251,7 +253,7 @@ main {
     width: 100%;
     height: 100%;
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(14, 13, 27, 0.4);
+    background-color: rgba(14, 13, 27, 0.6);
     transition: all 0.3s ease-in-out;
 }
  
@@ -325,13 +327,13 @@ main {
 .post h2 {
     font-size: 25px;
     font-weight: bold;
-    color: #b4a0ee;
+    color: var(--secondary);
     margin: 20px 0 20px 20px;
     padding-left: 10px;
 }
 
 .post div p {
-    color: var(--secondary);
+    color: var(--primary);
     margin: 10px;
     padding-right: 10px;
 }

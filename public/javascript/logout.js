@@ -23,7 +23,7 @@ function closeModal(event) {
     // close modal
     modalEl.classList.add("hide");
     modalEl.classList.remove("show");
-    
+
     document.location.reload();
 }
 document.querySelector('#close-modal').addEventListener('click', closeModal);
@@ -61,7 +61,7 @@ function inactivityLogout() {
 
     function resetTimer() {
         clearTimeout(time);
-        time = setTimeout(yourFunction, 10000);  // 30min
+        time = setTimeout(yourFunction, 1800000);  // 30min
     };
 };
 inactivityLogout();
