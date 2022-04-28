@@ -2,10 +2,8 @@ const express = require('express');
 const path = require('path');
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
-
 const app = express();
 const PORT = process.env.PORT || 3001;
-
 // express-handlebars
 const exphbs = require('express-handlebars');
 // allows helpers in utils/helps.js to be used in handlebars
@@ -16,10 +14,9 @@ const hbs = exphbs.create({ helpers });
 // sequelize session to create sessions for each user
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-
 const sess = {
     secret: 'chihuahuas',
-    cookie: {},
+    cookie: { maxAge: 60000 },
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({
@@ -65,6 +62,7 @@ sequelize.sync({ force: false }).then(() => {
 // WHEN I click on any other links in the navigation
 // THEN I am prompted to either sign up or sign in
 
+
 // DONEEEEEEEE
 // WHEN I choose to sign up
 // THEN I am prompted to create a username and password
@@ -76,6 +74,9 @@ sequelize.sync({ force: false }).then(() => {
 
 // WHEN I revisit the site at a later time and choose to sign in
 // THEN I am prompted to enter my username and password
+// have session expire after a certain time?
+// session cookie should already be doing this?
+// maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
 
 // DONEEEEEEEE
 // WHEN I am signed in to the site
@@ -115,6 +116,7 @@ sequelize.sync({ force: false }).then(() => {
 
 // WHEN I am idle on the site for more than a set time
 // THEN I am able to view comments but I am prompted to log in again before I can add, update, or delete comments
+// set interval! call logout function pop up a modal that says you've been logout
 
 // Mock-Up
 // The following animation demonstrates the application functionality:

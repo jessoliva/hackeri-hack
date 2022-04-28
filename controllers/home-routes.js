@@ -159,7 +159,13 @@ router.get('/dashboard', withAuth, (req, res) => {
     Post.findAll({
         where: {
             user_id: req.session.user_id
-        }
+        },
+        include: [
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
     })
     .then(postData => {
         const posts = postData.map(post => post.get({ plain: true }));
