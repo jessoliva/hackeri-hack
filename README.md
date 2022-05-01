@@ -1,7 +1,8 @@
 <h1 align="center">Jedai</h1>
 
 <p align="center">
-A blog site dedicated to provide a space for developers to share their ideas and interact. 
+A blog site dedicated to provide a space for developers to share their ideas and interact. </br>
+<a href="https://jedaiblog.herokuapp.com/">Jedai✨</a>
 </p>
 
 ## 📚&nbsp; Table of Contents
@@ -80,12 +81,15 @@ Seed Database Process:
 - Navigate to the roof directory of the project
 - Run the above seed command to seed with test data
 
-## 👩🏽‍💻&nbsp; Usage
-
-To invoke the application, navigate to the root directory of the project and run the following command:
+Invoke Application:
 
     npm start
+- Navigate to the root directory of the project and run the above command
 
+## 👩🏽‍💻&nbsp; Usage
+For a smooth experience the heroku site: [Jedai](https://jedaiblog.herokuapp.com/)
+
+![Mockup](./public/stylesheets/assets/mockup.gif)
 
 ## ✏️&nbsp; Contribution Guidelines
 
