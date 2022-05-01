@@ -28,7 +28,7 @@
     <link rel="icon" type="image/x-icon" href="../stylesheets/favicon.png">
 </head>
 
-<body class="vw-100 vh-100">
+<body class="vw-100 vh-100 background pb-2">
     <!-- hero -->
     <header class="hero shadow vw-100 sticky-top">
     <h1 class="animate-character text-center">jedai</h1>
@@ -74,23 +74,24 @@
         </ul>
     </nav>
     </header>
-
+    {{#if loggedIn}}
     <!-- modal for inactivity logout -->
     <div id="generate-modal" class="hide modal-single modal-fade d-flex align-items-center">
         <!-- modal info -->
         <div class="modal-info">
             <form id="user-form" class="d-flex justify-content-center align-items-center">
                 <p class="form-modal w-100  m-0 text-center"/>You've been logged out! 👋🏽 </p>
-                <button
+                {{!-- <button
                 id="close-modal"
                 type="submit"
                 class="modal-btns btn"
                 >
                 <i class="fa-solid fa-xmark"></i>
-                </button>
+                </button> --}}
             </form>
         </div>
     </div>
+    {{/if}}
 
     {{{body}}}
 

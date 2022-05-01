@@ -17,19 +17,34 @@ document.querySelector('#logout').addEventListener('click', logout);
 // modal element
 const modalEl = document.querySelector('#generate-modal');
 
-function closeModal(event) {
-    event.preventDefault();
-    
-    // close modal
-    modalEl.classList.add("hide");
-    modalEl.classList.remove("show");
-
-    document.location.reload();
-}
-document.querySelector('#close-modal').addEventListener('click', closeModal);
-
 // CREDIT
 // https://stackoverflow.com/questions/667555/how-to-detect-idle-time-in-javascript
+
+async function logoutRes() {
+    const logoutResponse = await fetch('/api/users/logout', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    if (logoutResponse.ok) {
+
+        setTimeout(() => {
+           // display modal
+           modalEl.classList.add("show");
+           modalEl.classList.remove("hide");
+        }, 3000);
+
+        setTimeout(() => {
+            // close modal
+            modalEl.classList.add("hide");
+            modalEl.classList.remove("show");
+            document.location.replace('/');
+        }, 3000);
+    } 
+    else {
+        alert(logoutResponse.statusText);
+    }
+};
 
 // logout user when inactive for a certain amount of time
 function inactivityLogout() {
@@ -43,25 +58,22 @@ function inactivityLogout() {
     window.onkeydown = resetTimer;   
     window.addEventListener('scroll', resetTimer, true);
 
-    async function yourFunction() {
-        const response = await fetch('/api/users/logout', {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' }
-        });
-    
-        if (response.ok) {
-            // display modal
-            modalEl.classList.add("show");
-            modalEl.classList.remove("hide");
-        } 
-        else {
-            alert(response.statusText);
-        }
-    };
-
     function resetTimer() {
         clearTimeout(time);
-        time = setTimeout(yourFunction, 1800000);  // 30min
+        time = setTimeout(logoutRes, 1800000);  // 30min
     };
 };
 inactivityLogout();
+
+
+
+// function closeModal(event) {
+//     event.preventDefault();
+    
+//     // close modal
+//     modalEl.classList.add("hide");
+//     modalEl.classList.remove("show");
+
+//     document.location.reload();
+// }
+// document.querySelector('#close-modal').addEventListener('click', closeModal);
